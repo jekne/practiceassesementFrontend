@@ -28,7 +28,7 @@ export default function Home() {
                 <div key={space.id}>
                   <h4>{space.title}</h4>
                   {/* <p>{space.description}</p> */}
-                  <NavLink to={`/spaces/${space.id}`}>
+                  <NavLink to={`/space/${space.id}`}>
                     <button>GO TO MY SPACE</button>
                   </NavLink>
                 </div>

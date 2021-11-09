@@ -1,39 +1,8 @@
-// const initialState = {
-//   loading: true,
-//   spaces: [],
-// };
-
-// export default function reducer(state = initialState, action) {
-//   switch (action.type) {
-//     case "SPACE/fetched": {
-//       console.log("this is my action", action);
-//       return {
-//         ...state,
-//         spaces: [...state.spaces, ...action.payload],
-//         loading: false,
-//       };
-//     }
-//     default: {
-//       return state;
-//     }
-//   }
-// }
 const initialState = {
+  loading: false,
   spaces: [],
 };
 
-// export default function spaces(state = initialState, action) {
-//   switch (action.type) {
-//     case "SPACES/allSpacesFetched": {
-//       return {
-//         spaces: action.payload.spaces,
-//       };
-//     }
-//     default: {
-//       return state;
-//     }
-//   }
-// }
 export default function spaces(state = initialState, action) {
   switch (action.type) {
     case "SPACES/allSpacesFetched": {
@@ -44,11 +13,14 @@ export default function spaces(state = initialState, action) {
       return result;
     }
     case "SPACES/spacesfullyfetchedbyid": {
-      const result = {
+      console.log("this is the current state", state);
+      const newState = {
         ...state,
-        spaces: [action.payload.spaces],
+        spaceDetails: action.payload,
+        // spaceDetails it is a new key
       };
-      return result;
+      console.log("this is my newState", newState);
+      return newState;
     }
     default: {
       return state;

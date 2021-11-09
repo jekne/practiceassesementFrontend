@@ -24,16 +24,12 @@ export function spacesFullyFetched(data) {
 }
 export function fetchSpaceById(id) {
   return async function thunk(dispatch, getState) {
-    const response = await axios.get(`${apiUrl}/spaces/:spaceId`);
+    const response = await axios.get(`${apiUrl}/spaces/${id}`);
+    console.log("Am I getting here?", response);
 
     const spaces = response.data;
-    // console.log("allSpaces", spaces)
 
-    dispatch(
-      spacesFullyFetchedById({
-        spaces,
-      })
-    );
+    dispatch(spacesFullyFetchedById(spaces));
   };
 }
 export function spacesFullyFetchedById(data) {
