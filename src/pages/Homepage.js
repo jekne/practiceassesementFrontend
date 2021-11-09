@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Jumbotron } from "react-bootstrap";
 import { fetchAllSpaces } from "../store/space/actions";
 import { selectAllSpaces } from "../store/space/selectors";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -26,8 +27,10 @@ export default function Home() {
               return (
                 <div key={space.id}>
                   <h4>{space.title}</h4>
-                  <p>{space.description}</p>
-                  <button>GO TO MY SPACE</button>
+                  {/* <p>{space.description}</p> */}
+                  <NavLink to={`/spaces/${space.id}`}>
+                    <button>GO TO MY SPACE</button>
+                  </NavLink>
                 </div>
               );
             })}

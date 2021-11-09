@@ -22,12 +22,33 @@ const initialState = {
   spaces: [],
 };
 
+// export default function spaces(state = initialState, action) {
+//   switch (action.type) {
+//     case "SPACES/allSpacesFetched": {
+//       return {
+//         spaces: action.payload.spaces,
+//       };
+//     }
+//     default: {
+//       return state;
+//     }
+//   }
+// }
 export default function spaces(state = initialState, action) {
   switch (action.type) {
     case "SPACES/allSpacesFetched": {
-      return {
+      const result = {
+        ...state,
         spaces: action.payload.spaces,
       };
+      return result;
+    }
+    case "SPACES/spacesfullyfetchedbyid": {
+      const result = {
+        ...state,
+        spaces: [action.payload.spaces],
+      };
+      return result;
     }
     default: {
       return state;

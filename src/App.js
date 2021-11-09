@@ -7,7 +7,7 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import Space from "./pages/Space";
+import SpaceDetails from "./pages/SpaceDetails";
 import Homepage from "./pages/Homepage";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -29,9 +29,9 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
+        <Route path="/space/:id" component={SpaceDetails} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
-        <Route path="/space" component={Space} />
         <Route exact path="/" component={Homepage} />
       </Switch>
     </div>
