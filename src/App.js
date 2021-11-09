@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import SpaceDetails from "./pages/SpaceDetails";
 import Homepage from "./pages/Homepage";
+import NewSignUp from "./pages/NewUserSignUp/newUserSignUp";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -29,6 +30,7 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
+        <Route path="/newsignup" component={NewSignUp} />
         <Route path="/space/:id" component={SpaceDetails} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />

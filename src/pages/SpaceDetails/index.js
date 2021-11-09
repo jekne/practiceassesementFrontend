@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSpaceById } from "../../store/space/actions";
 import { selectSpaceDetails } from "../../store/space/selectors";
 import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 
 export default function SpaceDetails() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ export default function SpaceDetails() {
           </div>
         )}
       </div>
+      <NavLink to={`/`}>
+        <button>GO BACK TO ALL SPACES</button>
+      </NavLink>
     </Jumbotron>
   );
 }
