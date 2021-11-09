@@ -26,7 +26,14 @@ export default function Home() {
             {spaces.map((space) => {
               return (
                 <div key={space.id}>
-                  <h4>{space.title}</h4>
+                  <h4
+                    style={{
+                      backgroundColor: `${space.backgroundColor}`,
+                      color: `${space.color}`,
+                    }}
+                  >
+                    {space.title}
+                  </h4>
                   {/* <p>{space.description}</p> */}
                   <NavLink to={`/space/${space.id}`}>
                     <button>GO TO MY SPACE</button>
