@@ -24,7 +24,7 @@ const initialState = {
 
 export default function spaces(state = initialState, action) {
   switch (action.type) {
-    case "spaces/allSpacesFetched": {
+    case "SPACES/allSpacesFetched": {
       return {
         spaces: action.payload.spaces,
       };

@@ -1,6 +1,3 @@
-// export default function Homepage() {
-//   return <div> this is my home page</div>;
-// }
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Jumbotron } from "react-bootstrap";
