@@ -25,7 +25,7 @@ export function spacesFullyFetched(data) {
 export function fetchSpaceById(id) {
   return async function thunk(dispatch, getState) {
     const response = await axios.get(`${apiUrl}/spaces/${id}`);
-    console.log("Am I getting here?", response);
+    // console.log("Am I getting here?", response);
 
     const spaces = response.data;
 

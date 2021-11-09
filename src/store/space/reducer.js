@@ -17,7 +17,7 @@ export default function spaces(state = initialState, action) {
       const newState = {
         ...state,
         loading: false,
-        spaceDetails: [action.payload],
+        spaceDetails: action.payload,
         // spaceDetails it is a new key
       };
       console.log("this is my newState", newState);

@@ -10,8 +10,8 @@ export default function SpaceDetails() {
   const params = useParams();
   const id = params.id;
 
-  const spaces = useSelector(selectSpaceDetails);
-  console.log("this is my spaces", spaces);
+  const space = useSelector(selectSpaceDetails);
+  console.log("this is my spaces", space);
 
   useEffect(() => {
     dispatch(fetchSpaceById(id));
@@ -22,21 +22,22 @@ export default function SpaceDetails() {
       <h1>Space details page</h1>
 
       <div>
-        {!spaces ? (
+        {!space ? (
           <p>Loading...</p>
         ) : (
-          <div>
-            {spaces.map((space) => {
+          <div
+            style={{
+              backgroundColor: `${space.backgroundColor}`,
+              color: `${space.color}`,
+            }}
+          >
+            <h4>{space.title}</h4>
+            <h5>{space.description}</h5>
+            {space.stories.map((story) => {
               return (
-                <div key={space.id}>
-                  <h4>{space.title}</h4>
-                  <p>{space.description}</p>
-                  <ul>
-                    <li>{space.color}</li>
-                    <li> {space.backgroundColor}</li>
-                    <li> {space.id}</li>
-                    <li>{space.userId}</li>
-                  </ul>
+                <div key={story.id}>
+                  <p>{story.name}</p>
+                  <img style={{ maxWidth: "50vw" }} src={story.imageUrl} />
                 </div>
               );
             })}
