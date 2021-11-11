@@ -36,7 +36,7 @@ export default function Home() {
                   </h4>
                   {/* <p>{space.description}</p> */}
                   <NavLink to={`/space/${space.id}`}>
-                    <button>GO TO MY SPACE</button>
+                    <button>VISIT SPACE</button>
                   </NavLink>
                 </div>
               );

@@ -4,3 +4,5 @@ export const selectAllSpaces = (reduxState) => reduxState.space.spaces;
 export const selectSpaceDetails = (reduxState) => {
   return reduxState.space.spaceDetails;
 };
+
+export const selectUserSpace = (reduxState) => reduxState.user.space;
