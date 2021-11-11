@@ -5,6 +5,7 @@ import { fetchSpaceById } from "../store/space/actions";
 import { selectUserSpace } from "../store/space/selectors";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
+import { deleteStory } from "../store/user/actions";
 
 export default function SpaceDetails() {
   const dispatch = useDispatch();
@@ -40,7 +41,11 @@ export default function SpaceDetails() {
                 <div key={story.id}>
                   <p>{story.name}</p>
                   <img style={{ maxWidth: "50vw" }} src={story.imageUrl} />
-                  <button onclick={document.getElementById(story.id)}>
+                  <button
+                    onClick={() => {
+                      dispatch(deleteStory(story.id));
+                    }}
+                  >
                     DELETE STORYS
                   </button>
                 </div>
