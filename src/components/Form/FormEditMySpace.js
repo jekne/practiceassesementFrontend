@@ -5,19 +5,21 @@ import { createNewStory } from "../store/user/actions";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 
-export default function FormNewStory() {
+export default function FormEditMySpace() {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [backgroundColor, setBackGroundColor] = useState("");
+  const [color, setColor] = useState("");
   const [formHidden, setFormHidden] = useState(false);
 
   const createStory = useSelector(selectUserSpace);
   const handleSubmit = (event) => {
     event.preventDefault();
     const id = createStory.length + 1;
-    dispatch(createNewStory({ name, content, imageUrl, id }));
+    dispatch(createNewStory({ title, description, backgroundColor, id }));
   };
+  //   title, description backgroundColor and color
   return (
     <div>
       <button onClick={() => setFormHidden(!formHidden)}>hide form</button>
@@ -27,29 +29,36 @@ export default function FormNewStory() {
             <ul>
               <li>
                 {" "}
-                <labeL>NAME:</labeL>
+                <labeL>TITLE:</labeL>
                 <input
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
                 />
               </li>
               <li>
                 {" "}
-                <labeL>CONTENT:</labeL>
+                <labeL>DESCRIPTION:</labeL>
                 <input
-                  value={content}
-                  onChange={(event) => setContent(event.target.value)}
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
                 />
               </li>
               <li>
                 {" "}
-                <labeL>IMAGEURL:</labeL>
+                <labeL>BACK GROUND COLOR:</labeL>
                 <input
-                  value={imageUrl}
-                  onChange={(event) => setImageUrl(event.target.value)}
+                  value={backgroundColor}
+                  onChange={(event) => setBackGroundColor(event.target.value)}
                 />
               </li>
-
+              <li>
+                {" "}
+                <labeL>COLOR:</labeL>
+                <input
+                  value={color}
+                  onChange={(event) => setColor(event.target.value)}
+                />
+              </li>
               <li>
                 {" "}
                 <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
