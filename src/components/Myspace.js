@@ -18,6 +18,7 @@ export default function SpaceDetails() {
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [formHidden, setFormHidden] = useState(false);
   // const { name, content, imageUrl } = getState();
 
   const space = useSelector(selectUserSpace);
@@ -71,45 +72,48 @@ export default function SpaceDetails() {
           </div>
         )}
       </div>
+
       <NavLink to={`/`}>
         <button>GO BACK TO ALL SPACES</button>
       </NavLink>
+      <button onClick={() => setFormHidden(!formHidden)}>hide form</button>
+      {!formHidden ? (
+        <div>
+          <Form>
+            <ul>
+              <li>
+                {" "}
+                <labeL>NAME:</labeL>
+                <input
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </li>
+              <li>
+                {" "}
+                <labeL>CONTENT:</labeL>
+                <input
+                  value={content}
+                  onChange={(event) => setContent(event.target.value)}
+                />
+              </li>
+              <li>
+                {" "}
+                <labeL>IMAGEURL:</labeL>
+                <input
+                  value={imageUrl}
+                  onChange={(event) => setImageUrl(event.target.value)}
+                />
+              </li>
 
-      <div id="content">
-        <Form>
-          <ul>
-            <li>
-              {" "}
-              <labeL>NAME:</labeL>
-              <input
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </li>
-            <li>
-              {" "}
-              <labeL>CONTENT:</labeL>
-              <input
-                value={content}
-                onChange={(event) => setContent(event.target.value)}
-              />
-            </li>
-            <li>
-              {" "}
-              <labeL>IMAGEURL:</labeL>
-              <input
-                value={imageUrl}
-                onChange={(event) => setImageUrl(event.target.value)}
-              />
-            </li>
-
-            <li>
-              {" "}
-              <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
-            </li>
-          </ul>
-        </Form>
-      </div>
+              <li>
+                {" "}
+                <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
+              </li>
+            </ul>
+          </Form>
+        </div>
+      ) : null}
     </Jumbotron>
   );
 }

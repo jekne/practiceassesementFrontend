@@ -10,6 +10,7 @@ export default function SpaceDetails() {
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [formHidden, setFormHidden] = useState(false);
 
   const createStory = useSelector(selectUserSpace);
   const handleSubmit = (event) => {
@@ -19,39 +20,44 @@ export default function SpaceDetails() {
   };
   return (
     <div>
-      <Form>
-        <ul>
-          <li>
-            {" "}
-            <labeL>NAME:</labeL>
-            <input
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </li>
-          <li>
-            {" "}
-            <labeL>CONTENT:</labeL>
-            <input
-              value={content}
-              onChange={(event) => setContent(event.target.value)}
-            />
-          </li>
-          <li>
-            {" "}
-            <labeL>IMAGEURL:</labeL>
-            <input
-              value={imageUrl}
-              onChange={(event) => setImageUrl(event.target.value)}
-            />
-          </li>
+      <button onClick={() => setFormHidden(!formHidden)}>hide form</button>
+      {!formHidden ? (
+        <div>
+          <Form>
+            <ul>
+              <li>
+                {" "}
+                <labeL>NAME:</labeL>
+                <input
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </li>
+              <li>
+                {" "}
+                <labeL>CONTENT:</labeL>
+                <input
+                  value={content}
+                  onChange={(event) => setContent(event.target.value)}
+                />
+              </li>
+              <li>
+                {" "}
+                <labeL>IMAGEURL:</labeL>
+                <input
+                  value={imageUrl}
+                  onChange={(event) => setImageUrl(event.target.value)}
+                />
+              </li>
 
-          <li>
-            {" "}
-            <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
-          </li>
-        </ul>
-      </Form>
+              <li>
+                {" "}
+                <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
+              </li>
+            </ul>
+          </Form>
+        </div>
+      ) : null}
     </div>
   );
 }
