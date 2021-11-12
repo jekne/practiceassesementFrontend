@@ -6,11 +6,19 @@ import { selectUserSpace } from "../store/space/selectors";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import { deleteStory } from "../store/user/actions";
+import { createNewStory } from "../store/user/actions";
+import { Form } from "react-bootstrap";
+import { useState } from "react";
 
 export default function SpaceDetails() {
   const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
+
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  // const { name, content, imageUrl } = getState();
 
   const space = useSelector(selectUserSpace);
   console.log("this is my spaces", space);
@@ -18,6 +26,13 @@ export default function SpaceDetails() {
   useEffect(() => {
     dispatch(fetchSpaceById(id));
   }, [dispatch]);
+
+  const createStory = useSelector(selectUserSpace);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const id = createStory.length + 1;
+    dispatch(createNewStory({ name, content, imageUrl, id }));
+  };
 
   return (
     <Jumbotron>
@@ -35,7 +50,9 @@ export default function SpaceDetails() {
             }}
           >
             <h4>{space.title}</h4>
-            {/* <h5>{space.description}</h5> */}
+
+            <h5>{space.description}</h5>
+
             {space.stories.map((story) => {
               return (
                 <div key={story.id}>
@@ -57,6 +74,48 @@ export default function SpaceDetails() {
       <NavLink to={`/`}>
         <button>GO BACK TO ALL SPACES</button>
       </NavLink>
+
+      <div id="content">
+        <Form>
+          <ul>
+            <li>
+              {" "}
+              <labeL>NAME:</labeL>
+              <input
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </li>
+            <li>
+              {" "}
+              <labeL>CONTENT:</labeL>
+              <input
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+              />
+            </li>
+            <li>
+              {" "}
+              <labeL>IMAGEURL:</labeL>
+              <input
+                value={imageUrl}
+                onChange={(event) => setImageUrl(event.target.value)}
+              />
+            </li>
+
+            <li>
+              {" "}
+              <button onClick={handleSubmit}>POST A COLL STORY BRO</button>;
+            </li>
+          </ul>
+        </Form>
+      </div>
     </Jumbotron>
   );
 }
+
+//   dispatch(createNewStory()); remember to pass the same thing from the action
+// the button place kind of true or false when you touch open a new thin kinf of a if
+// {
+//   name, content, imageUrl;
+// }

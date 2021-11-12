@@ -29,6 +29,11 @@ const storyDeleted = (id) => ({
   payload: id,
 });
 
+const creatAstory = (story) => ({
+  type: "USER/create-new-story",
+  payload: story,
+});
+
 export const logOut = () => ({ type: LOG_OUT });
 
 export const signUp = (name, email, password) => {
@@ -115,6 +120,7 @@ export const getUserWithStoredToken = () => {
   };
 };
 
+// this is de delete function to delete the storys in the user on myspace
 export function deleteStory(id) {
   return async function thunk(dispatch, getState) {
     const response = await axios.delete(`${apiUrl}/stories/${id}`);
@@ -122,3 +128,21 @@ export function deleteStory(id) {
     dispatch(storyDeleted(id));
   };
 }
+
+//http POST :4000/stories/4/story name="Karla story" content="a great content" imageUrl=imagenice
+// this is the create new story function:still on the test mode
+export function createNewStory({ name, content, imageUrl }) {
+  return async function thunk(dispatch, getState) {
+    const { user } = getState();
+    const spaceId = user.space.id;
+    console.log("this is my space id nnnnn", spaceId);
+    const response = await axios.post(`${apiUrl}/stories/${spaceId}/story`, {
+      name,
+      content,
+      imageUrl,
+    });
+    console.log("Am I getting here?", response);
+    dispatch(creatAstory(response.data));
+  };
+}
+// http://localhost:4000/3/story
