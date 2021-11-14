@@ -11,6 +11,7 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const SPACE_UPDATED = "SPACE_UPDATED";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -32,6 +33,10 @@ const storyDeleted = (id) => ({
 const creatAstory = (story) => ({
   type: "USER/create-new-story",
   payload: story,
+});
+export const spaceUpdated = (space) => ({
+  type: SPACE_UPDATED,
+  payload: space,
 });
 
 export const logOut = () => ({ type: LOG_OUT });
@@ -131,18 +136,55 @@ export function deleteStory(id) {
 
 //http POST :4000/stories/4/story name="Karla story" content="a great content" imageUrl=imagenice
 // this is the create new story function:still on the test mode
-export function createNewStory({ name, content, imageUrl }) {
+export function createNewStory({ name, content, imageUrl, token }) {
   return async function thunk(dispatch, getState) {
     const { user } = getState();
     const spaceId = user.space.id;
     console.log("this is my space id nnnnn", spaceId);
-    const response = await axios.post(`${apiUrl}/stories/${spaceId}/story`, {
-      name,
-      content,
-      imageUrl,
-    });
+    const response = await axios.post(
+      `${apiUrl}/stories/${spaceId}/story`,
+      {
+        name,
+        content,
+        imageUrl,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch(
+      showMessageWithTimeout("success", false, "Story posted on your space!")
+    );
     console.log("Am I getting here?", response);
     dispatch(creatAstory(response.data));
   };
 }
 // http://localhost:4000/3/story
+export function updateSpace(
+  spaceId,
+  title,
+  description,
+  backgroundColor,
+  color,
+  token
+) {
+  // console.log("Delete this story",storyId)
+  return async function thunk(dispatch, getState) {
+    const response = await axios.put(
+      `${apiUrl}/spaces/${spaceId}`,
+      {
+        title: title,
+        description: description,
+        backgroundColor: backgroundColor,
+        color: color,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    dispatch(showMessageWithTimeout("success", false, "Space updated!"));
+    dispatch(spaceUpdated(response.data.space));
+    dispatch(appDoneLoading());
+  };
+}

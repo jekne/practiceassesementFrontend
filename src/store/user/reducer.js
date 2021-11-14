@@ -1,4 +1,9 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
+import {
+  LOG_OUT,
+  LOGIN_SUCCESS,
+  TOKEN_STILL_VALID,
+  SPACE_UPDATED,
+} from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -50,6 +55,11 @@ export default (state = initialState, action) => {
           stories: [...state.space.stories, action.payload],
           // stories: newStoriesCreated, //stories: [...space.stories, {new story}]
         },
+      };
+    case SPACE_UPDATED:
+      return {
+        ...state,
+        space: { ...action.payload, stories: state.space.stories },
       };
     default:
       return state;

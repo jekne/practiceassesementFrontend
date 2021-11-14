@@ -9,7 +9,11 @@ import { deleteStory } from "../store/user/actions";
 import { createNewStory } from "../store/user/actions";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-
+//
+import { getUserWithStoredToken } from "../store/user/actions";
+import { selectToken } from "../store/user/selectors";
+//
+import FormEditMySpace from "./Form/FormEditMySpace";
 export default function SpaceDetails() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -20,7 +24,8 @@ export default function SpaceDetails() {
   const [imageUrl, setImageUrl] = useState("");
   const [formHidden, setFormHidden] = useState(false);
   // const { name, content, imageUrl } = getState();
-
+  const token = useSelector(selectToken);
+  //
   const space = useSelector(selectUserSpace);
   console.log("this is my spaces", space);
 
@@ -28,15 +33,24 @@ export default function SpaceDetails() {
     dispatch(fetchSpaceById(id));
   }, [dispatch]);
 
+  //
+  useEffect(() => {
+    dispatch(getUserWithStoredToken());
+  }, [dispatch]);
+  //
+
   const createStory = useSelector(selectUserSpace);
   const handleSubmit = (event) => {
     event.preventDefault();
     const id = createStory.length + 1;
-    dispatch(createNewStory({ name, content, imageUrl, id }));
+    dispatch(createNewStory({ name, content, imageUrl, id, token }));
   };
 
   return (
     <Jumbotron>
+      <div>
+        <FormEditMySpace></FormEditMySpace>{" "}
+      </div>
       <div>
         <strong>this is my space, belongs to a one person loggin</strong>
       </div>
